@@ -10,12 +10,49 @@ from flask import request,flash,session,abort
 from flask import Response, stream_with_context
 
 
+from DB_handler import DBModule
+
 app = Flask(__name__)
+DB = DBModule()
+
 
 @app.route("/")
 def index():
-    
     return render_template("index.html")
+
+@app.route("/signin")
+def signin():
+    return render_template("signin.html")
+
+
+@app.route("/signin_done",methods=["GET"])
+def signin_done():
+    name = request.args.get("signin_name")
+    uid = request.args.get("signin_id")
+    pwd = request.args.get("signin_pwd")
+    phoneNumber = request.args.get("signin_phoneNumber")
+    DB.signin(name,uid,pwd,phoneNumber)
+    return redirect(url_for("login"))
+    
+
+@app.route("/login")
+def login():
+    
+    #  jwt 조건문
+    return render_template("login.html")
+
+@app.route("/login_done")
+def login_done():
+    uid = request.args.get("signin_id")
+    pwd = request.args.get("signin_pwd")
+
+
+    #  jwt 조건문
+    
+    return render_template("login.html")
+
+
+
 
 
 
