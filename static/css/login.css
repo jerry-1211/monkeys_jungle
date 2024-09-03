@@ -1,0 +1,20 @@
+.mainTitle {
+    color: green;
+}
+.subTitle {
+    margin-top: 20px;
+}
+.loginBox {
+    margin-top: 50px;
+}
+.loginId {
+    width: 350px;
+    height: 35px;
+}
+.loginPw {
+    width: 350px;
+    height: 35px;
+}
+.loginBtn {
+    margin-top: 20px;
+}
