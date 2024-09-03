@@ -15,13 +15,23 @@ class DBModule :
         self.user_collection = self.db.users
         pass
 
-    def signin(self,name,_id_,pwd,phoneNumber):
+    def signin(self,name,userId,pwd,phoneNumber,answerQ1,answerQ2,answerQ3,answerQ4,answerQ5,answerQ6,answerQ7,answerQ8,answerQ9,answerQ10,):
         informations = {
-            "uname" : name,
+            "uName" : name,
+            "userId" : userId,
             "pwd" : pwd,
             "phoneNumber" : phoneNumber,
+            "q1" : answerQ1,
+            "q2" : answerQ2,
+            "q3" : answerQ3,
+            "q4" : answerQ4,
+            "q5" : answerQ5,
+            "q6" : answerQ6,
+            "q7" : answerQ7,
+            "q8" : answerQ8,
+            "q9" : answerQ9,
+            "q10" : answerQ10,
         } 
-        
         self.user_collection.insert_one(informations)
 
 

@@ -25,13 +25,23 @@ def signin():
     return render_template("signin.html")
 
 
-@app.route("/signin_done",methods=["GET"])
+@app.route("/signin_done",methods=["POST"])
 def signin_done():
-    name = request.args.get("signin_name")
-    uid = request.args.get("signin_id")
-    pwd = request.args.get("signin_pwd")
-    phoneNumber = request.args.get("signin_phoneNumber")
-    DB.signin(name,uid,pwd,phoneNumber)
+    name = request.form.get("signin_name")
+    userId = request.form.get("signin_id")
+    pwd = request.form.get("signin_pwd")
+    phoneNumber = request.form.get("signin_phoneNumber")
+    q1 = request.form.get("signin_q1")
+    q2 = request.form.get("signin_q2")
+    q3 = request.form.get("signin_q3")
+    q4 = request.form.get("signin_q4")
+    q5 = request.form.get("signin_q5")
+    q6 = request.form.get("signin_q6")
+    q7 = request.form.get("signin_q7")
+    q8 = request.form.get("signin_q8")
+    q9 = request.form.get("signin_q9")
+    q10 = request.form.get("signin_q10")
+    DB.signin(name,userId,pwd,phoneNumber,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
     return redirect(url_for("login"))
     
 
