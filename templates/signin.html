@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>monkeysJungle-login</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../static/css/styles.css" rel="stylesheet" />
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script defer src="../static/js/scripts.js"></script>
+
+    <link rel="javascript" href="static/js/javascript.js">
+
+    <!-- 회원가입페이지 css -->
+    <link rel="stylesheet" href="../static/css/join.css">
+
+</head>
+
+<body>
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container px-lg-5">
+            <a class="navbar-brand" href="#게시판으로이동!!">Monkeys Jungle</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#게시판으로이동!!">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="join.html">Join</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="wrap">
+        <h1 class="mainTitle display-5 fw-bold">Monkeys Jungle</h1>
+        <p class="fs-4">Join with Monkeys</p>
+
+
+        <form action="{{url_for('signin_done')}}" method="get">
+            <input class="form-control" name="signin_name" id="signin_name" type="text" placeholder="이름"
+                data-sb-validations="required" />
+            <input class="form-control" name="signin_id" id="signin_id" type="text" placeholder="아이디"
+                data-sb-validations="required" />
+            <input class="form-control" name="signin_pwd" id="signin_pwd" type="password" placeholder="패스워드"
+                data-sb-validations="required" />
+            <input class="form-control" name="signin_phoneNumber" id="signin_phoneNumber" type="number"
+                placeholder="핸드폰" data-sb-validations="required" />
+            <input class="form-control" name="signin_id" id="signin_id" type="text" placeholder="아이디"
+                data-sb-validations="required" />
+
+
+
+
+            <div class="selectBox">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>코골이! 나의 등급은?</option>
+                    <option value="1">상(심각함)</option>
+                    <option value="2">중(참을만함)</option>
+                    <option value="3">하(조용조용)</option>
+                </select>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>청결관련! 나의 등급은?</option>
+                    <option value="1">상(강박증)</option>
+                    <option value="2">중(어느정도신경안씀)</option>
+                    <option value="3">하(일주일안씻어도OK)</option>
+                </select>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>정글에서 나의 개발 성향은?</option>
+                    <option value="1">죽더라도 완벽하게 개발</option>
+                    <option value="2">롱런이 중요, 어느정도 못해도 괜찮아</option>
+                    <option value="3">롱런,완벽 모두 원해</option>
+                </select>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>나의 대인관계 성향은?</option>
+                    <option value="1">함부로 대해줘</option>
+                    <option value="2">조금만 천천히 다가와줘</option>
+                </select>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>나는 아침형 인간? 저녁형 인간?</option>
+                    <option value="1">아침형 인간</option>
+                    <option value="2">저녁형 인간</option>
+                </select>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>내가 가장 좋아하는 영화 장르는?</option>
+                    <option value="1">액션 (터지는 게 최고지!)</option>
+                    <option value="2">로맨스 (사랑은 아름다워)</option>
+                    <option value="3">코미디 (웃음이 필요해)</option>
+                    <option value="4">공포 (쫄깃한 긴장감)</option>
+                </select>
+
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>나는 어떤 여행 스타일인가요?</option>
+                    <option value="1">계획형 (모든 것을 계획대로!)</option>
+                    <option value="2">즉흥형 (발길 닿는 대로)</option>
+                    <option value="3">편안함형 (휴양지에서 쉬기)</option>
+                    <option value="4">탐험형 (모험과 탐험!)</option>
+                </select>
+
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>나의 영혼의 동물은?</option>
+                    <option value="1">사자 (리더쉽과 자신감)</option>
+                    <option value="2">돌고래 (사교적이고 즐거움)</option>
+                    <option value="3">부엉이 (지혜롭고 신중함)</option>
+                    <option value="4">고양이 (독립적이고 자유로움)</option>
+                </select>
+
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>내가 가장 즐기는 휴식 방법은?</option>
+                    <option value="1">독서 (책 속에서 휴식)</option>
+                    <option value="2">운동 (땀 흘리며 스트레스 해소)</option>
+                    <option value="3">넷플릭스 정주행 (마라톤 시청)</option>
+                    <option value="4">낮잠 (꿀잠이 최고)</option>
+                </select>
+
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>내가 가고 싶은 시간 여행은?</option>
+                    <option value="1">미래 (미래의 기술과 생활)</option>
+                    <option value="2">과거 (역사적 순간 체험)</option>
+                    <option value="3">과거의 특정 시점 (나의 과거로 돌아가기)</option>
+                    <option value="4">아무데도 가고 싶지 않다 (지금이 최고!)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="signin btn loginBtn btn btn-success btn-lg ">Signin</button>
+        </form>
+
+    </div>
+    </div>
+
+</body>
+
+</html>
