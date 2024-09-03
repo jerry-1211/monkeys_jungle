@@ -1,0 +1,31 @@
+.wrap {
+    text-align: center;
+}
+.selectBox {
+    padding-left: 510px;
+}
+.mainTitle {
+    color: green;
+    margin-top: 15px;
+}
+.joinId {
+    width: 400px;
+    height: 30px;
+}
+.joinPw {
+    width: 400px;
+    height: 30px;
+}
+.joinTel {
+    width: 400px;
+    height: 30px;
+}
+.joinMbti {
+    width: 400px;
+    height: 30px;
+}
+.form-select {
+    width: 400px;
+    margin-bottom: 7px;
+    text-align: center;
+}
