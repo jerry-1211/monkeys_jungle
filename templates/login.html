@@ -1,3 +1,38 @@
+<style>
+    .mainTitle {
+        color: green;
+    }
+    .subTitle {
+        margin-top: 70px;
+    }
+    #login_id {
+        width: 400px;
+        height: 60px;
+        margin-bottom: 30px;
+        margin-top: 80px;
+        border: 2px solid green;
+        margin-left: 310px;
+    }
+    #login_pwd {
+        width: 400px;
+        height: 60px;
+        border: 2px solid green;
+        margin-left: 310px;
+        margin-bottom: 50px;
+    }
+    .loginBtn {
+        margin-top: 20px;
+    }
+    .loginPageBtn {
+        display: flex;
+        margin-left: 370px;
+    }
+</style>
+
+
+
+
+
 
     <body>
         {% extends "base.html" %}
@@ -11,22 +46,25 @@
                 <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                     <div class="m-4 m-lg-5">
                         <h1 class="mainTitle display-5 fw-bold">Monkeys Jungle</h1>
-                        <p class="subTitle fs-4">정글이라는 정글속에서 생존하기 위한 최소한의 도구</p>
+                        <p class="subTitle fs-4">정글이라는 정글속에서 생존하기 위한 최소한의 도구
+                            <br>함께 성장해 생존하자!</p>
 
 
-                        <form action="{{url_for('login_done')}}" method="get">
-                            <input class="form-control" name="signin_id" id="signin_id" type="text"
-                                placeholder="Enter your ID..." data-sb-validations="required" />
-                            <input class=" form-control" name="signin_pwd" id="signin_pwd" type="password"
-                                placeholder="Enter your PW..." data-sb-validations="required" />
-                            <button type="submit" class="signin btn  loginBtn btn btn-success btn-lg">Login</button>
-                            </div>
-                        </form>
-                        
+                            <form action="{{url_for('login_done')}}" method="POST">
+                                <input class="form-control" name="login_id" id="login_id" type="text"
+                                    placeholder="Enter your ID..." data-sb-validations="required" />
+                                <input class="form-control" name="login_pwd" id="login_pwd" type="password"
+                                    placeholder="Enter your PW..." data-sb-validations="required" />
+                                
+                                <div class="loginPageBtn">
+                                    <button type="submit" class="signin btn loginBtn btn btn-success btn-lg">Log in</button>
+                                </div>
+                            </form>
+
                         <div class="col-lg-6 sigin-wd">
-                            <a href="{{ url_for('signin') }}" class="signin btn loginBtn btn btn-success btn-lg">Signin</a>
+                            <a href="{{ url_for('signin') }}" class="signin btn loginBtn btn btn-success btn-lg">Sign in</a>
                         </div>
-  
+                        
                     </div>
                 </div>
             </div>
