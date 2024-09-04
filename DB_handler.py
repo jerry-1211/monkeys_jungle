@@ -59,11 +59,14 @@ class DBModule :
     
     
     # 질문 저장
-    def card_info(self,title,content,status):
+    def card_info(self,title,content,status, userId):
         informations = {
             "title" : title,
             "content" : content,
-            "status" : status
+            "status" : status,
+            "userId" : userId
+            
+            
         }
         self.post_collection.insert_one(informations)
 

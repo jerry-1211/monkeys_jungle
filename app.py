@@ -181,16 +181,29 @@ def card():
 
 @app.route("/submit-card",methods=["POST"])
 def submitCard():
+    token = request.cookies.get('token')
+    user_data, error_response, status_code = verify_token(token)
+    
+    if error_response:
+        # 사용자가 로그인하지 않았거나 토큰이 유효하지 않은 경우 처리
+        return jsonify(error_response), status_code  
+    
+    username = user_data.get("user")
     title = request.form["title"]
     status = request.form["status"]
     content = request.form["content"]
 
-    existing_card = DB.existing_card({"title": title, "status": status, "content": content})
+    existing_card = DB.existing_card({
+        "title": title,
+        "status": status,
+        "content": content,
+        "userId": username
+        })
     if existing_card:
         return render_template("card.html")  # 카드가 이미 존재하는 경우 아무 작업도 수행하지 않음
     
-    DB.card_info(title, content, status)
-    return render_template("card.html")
+    DB.card_info(title, content, status, username)
+    return render_template("card.html",  username=username)
 
     
 @app.route('/upload-card', methods=['GET'])
