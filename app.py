@@ -266,12 +266,12 @@ def chat_user():
     token = request.cookies.get('token')
     user_data = verify_token(token)     
     username = user_data[0]["user"]
-    return render_template("chat.html", logged_in=bool(user_data))
+    print(username)
+    return render_template("chat.html",username=username, logged_in=bool(user_data))
 
 
 
 # $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
 # @app.route("/get_userinfo", methods=["POST"])
 # def giveUserInfo():
 #     userId = request.form['id_give']
@@ -299,7 +299,7 @@ def chat_user():
 
 
 
-# if __name__ == '__main__':
-#     socketio.run(app,host="0.0.0.0", port=5001, debug=True)
+if __name__ == '__main__':
+    socketio.run(app,host="0.0.0.0", port=5001, debug=True)
 
 
