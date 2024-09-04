@@ -14,7 +14,7 @@ class DBModule :
         self.db = client.monkeys
         self.user_collection = self.db.users
 
-    def signin(self,name,userId,pwd,phoneNumber,mbti,answerQ1,answerQ2,answerQ3,answerQ4,answerQ5,answerQ6,answerQ7,answerQ8,answerQ9,answerQ10,):
+    def signin(self,name,userId,pwd,phoneNumber,mbti,answerQ1,answerQ2,answerQ3,answerQ4,answerQ5,answerQ6,answerQ7,answerQ8,answerQ9,answerQ10):
         informations = {
             "uName" : name,
             "userId" : userId,

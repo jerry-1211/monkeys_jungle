@@ -40,6 +40,7 @@ def signin_done():
     userId = request.form.get("signin_id")
     pwd = request.form.get("signin_pwd")
     phoneNumber = request.form.get("signin_phoneNumber")
+    mbti = request.form.get("signin_mbti")
     q1 = request.form.get("signin_q1")
     q2 = request.form.get("signin_q2")
     q3 = request.form.get("signin_q3")
@@ -50,7 +51,7 @@ def signin_done():
     q8 = request.form.get("signin_q8")
     q9 = request.form.get("signin_q9")
     q10 = request.form.get("signin_q10")
-    DB.signin(name,userId,pwd,phoneNumber,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
+    DB.signin(name,userId,pwd,phoneNumber,mbti,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
     return redirect(url_for("login"))
     
 # 토큰 검증을 위한 데코레이터
