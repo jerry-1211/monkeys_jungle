@@ -258,9 +258,17 @@ def get_data():
 # ------------------------------------------------------
 @app.route('/chat')
 def chat():
+
+    return redirect(url_for('chat_user'))
+
+@app.route('/chat_user')
+def chat_user():
     token = request.cookies.get('token')
-    user_data = verify_token(token) if token else None
-    return render_template("chat.html", logged_in=bool(user_data))
+    user_data = verify_token(token)     
+    username = user_data[0]["user"]
+    
+    return render_template('chat.html', username=username)
+
 
 
 

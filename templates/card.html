@@ -86,6 +86,13 @@
             border-radius: 10px;
             cursor: pointer;
         }
+        .해줄게요.card_status.btn.btn-secondary.btn-lg:disabled{
+            background-color: #0d6efd;
+        }
+        .해주세요.card_status.btn.btn-secondary.btn-lg:disabled{
+            background-color: #dc3545;
+        }
+
     </style>
 
 
@@ -136,9 +143,9 @@
 
     <!-- Buttons to trigger modals -->
     <div class="create-button footer text-center mt-4">
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+        <button type="button" class="make_btn1 btn btn-danger" data-bs-toggle="modal"
             data-bs-target="#CardMakingModal1">해주세요</button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+        <button type="button" class="make_btn2 btn btn-primary" data-bs-toggle="modal"
             data-bs-target="#CardMakingModal2">해줄게요</button>
     </div>
     <!-- Modals -->
@@ -250,7 +257,7 @@
                             <h2 class="fs-3 fw-bold card-title">${title}</h2>
                             <p class="mb-0 text-left">${contents}</p>
                         </div>
-                        <button type="button" class="btn btn-secondary btn-lg" disabled>${status}</button>
+                        <button type="button" class="card_status ${status} btn btn-secondary btn-lg" disabled>${status}</button>
                     </div>
                 </div>
             `;
