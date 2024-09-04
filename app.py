@@ -266,8 +266,7 @@ def chat_user():
     token = request.cookies.get('token')
     user_data = verify_token(token)     
     username = user_data[0]["user"]
-    
-    return render_template('chat.html', username=username)
+    return render_template("chat.html", logged_in=bool(user_data))
 
 
 
