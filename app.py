@@ -173,10 +173,12 @@ def serialize_message(message):
 
 @app.route("/card")
 def card():
-    
-    #  jwt 조건문
     token = request.cookies.get('token')
     user_data = verify_token(token) if token else None
+    
+    if not(user_data) : 
+        flash('로그인 후 이용 부탁드립니다 !')
+        return redirect(url_for('index'))  
     return render_template("card.html", logged_in=bool(user_data))
 
 @app.route("/submit-card",methods=["POST"])
