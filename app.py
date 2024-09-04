@@ -258,9 +258,10 @@ def get_data():
 
 
 # ------------------------------------------------------
+
+"""제림 계시글 정보 업로드 중"""
 @app.route('/chat')
 def chat():
-
     return redirect(url_for('chat_user'))
 
 @app.route('/chat_user')
@@ -268,8 +269,12 @@ def chat_user():
     token = request.cookies.get('token')
     user_data = verify_token(token)     
     username = user_data[0]["user"]
-    print(username)
-    return render_template("chat.html",username=username, logged_in=bool(user_data))
+ 
+    info = DB.get_post_info(pid_post)
+    return render_template("chat.html",
+        username=username, logged_in=bool(user_data),
+        info = info 
+        )
 
 
 
@@ -302,6 +307,6 @@ def chat_user():
 
 
 if __name__ == '__main__':
-    socketio.run(app,host="0.0.0.0", port=5001, debug=True)
+    socketio.run(app,host="0.0.0.0", port=3000, debug=True)
 
 
