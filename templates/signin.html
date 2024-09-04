@@ -23,6 +23,11 @@
     <!-- 회원가입페이지 css -->
     <link rel="stylesheet" href="../static/css/join.css">
 
+    <script>
+        function signAlert(){
+            alert("환영합니다. 회원가입이 완료되었습니다.");
+        }
+    </script>
 
 </head>
 
@@ -38,9 +43,9 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a></li>
                     {% if logged_in %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Log out</a></li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Log in</a></li>
                     {% endif %}
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('card') }}">Card</a></li>
                 </ul>
@@ -56,18 +61,18 @@
         <p class="fs-4">Join with Monkeys</p>
 
         <form action="{{url_for('signin_done')}}" method="POST">
-            <input class="form-control" name="signin_name" id="signin_name" type="text" placeholder="이름"
+            <input class="form-control" name="signin_name" id="signin_name" type="text" placeholder="이름을 입력해 주세요."
                 data-sb-validations="required" />
-            <input class="form-control" name="signin_id" id="signin_id" type="text" placeholder="아이디"
+            <input class="form-control" name="signin_id" id="signin_id" type="text" placeholder="아이디를 입력해 주세요."
                 data-sb-validations="required" />
-            <input class="form-control" name="signin_pwd" id="signin_pwd" type="password" placeholder="패스워드"
+            <input class="form-control" name="signin_pwd" id="signin_pwd" type="password" placeholder="패스워드를 입력해 주세요."
                 data-sb-validations="required" />
             <input class="form-control" name="signin_phoneNumber" id="signin_phoneNumber" type="text"
-                placeholder="핸드폰" data-sb-validations="required" />
-            <input class="form-control" name="signin_mbti" id="signin_mbti" type="text" placeholder="MBTI"
+                placeholder="핸드폰번호를 입력해 주세요." data-sb-validations="required" />
+            <input class="form-control" name="signin_mbti" id="signin_mbti" type="text" placeholder="MBTI를 입력해 주세요."
                 data-sb-validations="required" />
             
-            <div>
+            <div class="selectBox">
                 <select name="signin_q1" class="form-select" aria-label="Default select example">
                     <option selected>코골이! 나의 등급은?</option>
                     <option value="상(심각함)">상(심각함)</option>
@@ -132,7 +137,7 @@
                     <option value="아무데도 가고 싶지 않다 (지금이 최고!)">아무데도 가고 싶지 않다 (지금이 최고!)</option>
                 </select>
             </div>
-            <button type="submit" class="signin btn loginBtn btn btn-success btn-lg ">Signin</button>
+            <button onclick="signAlert()" type="submit" class="signin btn loginBtn btn btn-success btn-lg ">Sign in</button>
         </form>
     </div>
 
