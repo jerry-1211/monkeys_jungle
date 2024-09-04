@@ -5,28 +5,30 @@
     .subTitle {
         margin-top: 70px;
     }
+    .ad {
+        margin-top: 60px;
+        color: darkblue;
+        opacity: 0.55;
+    }
     #login_id {
-        width: 400px;
+        width: 600px;
         height: 60px;
-        margin-bottom: 30px;
-        margin-top: 80px;
         border: 2px solid green;
-        margin-left: 310px;
+        margin: 50px auto 0px;
     }
     #login_pwd {
-        width: 400px;
+        width: 600px;
         height: 60px;
         border: 2px solid green;
-        margin-left: 310px;
-        margin-bottom: 50px;
+        margin: 30px auto 0px;
     }
-    .loginBtn {
-        margin-top: 20px;
-    }
-    .loginPageBtn {
+    .btnBox {
         display: flex;
-        margin-left: 370px;
+        justify-content: center;
+        margin-left: 170px;
+        margin-top: 50px;
     }
+
 </style>
 
 
@@ -48,23 +50,22 @@
                         <h1 class="mainTitle display-5 fw-bold">Monkeys Jungle</h1>
                         <p class="subTitle fs-4">정글이라는 정글속에서 생존하기 위한 최소한의 도구
                             <br>함께 성장해 생존하자!</p>
+                        <p class="ad">지금 몽키즈와 함께 하신다면 바나나를 5개 제공해 드립니다.</p>
 
-
-                            <form action="{{url_for('login_done')}}" method="POST">
-                                <input class="form-control" name="login_id" id="login_id" type="text"
-                                    placeholder="Enter your ID..." data-sb-validations="required" />
-                                <input class="form-control" name="login_pwd" id="login_pwd" type="password"
-                                    placeholder="Enter your PW..." data-sb-validations="required" />
-                                
-                                <div class="loginPageBtn">
+                        <form action="{{url_for('login_done')}}" method="POST">
+                            <input class="form-control" name="login_id" id="login_id" type="text"
+                                placeholder="아이디를 입력해주세요." data-sb-validations="required" />
+                            <input class="form-control" name="login_pwd" id="login_pwd" type="password"
+                                placeholder="비밀번호를 입력해주세요." data-sb-validations="required" />
+                            <div class="btnBox">
+                                <div id="loginBtn" class="loginPageBtn">
                                     <button type="submit" class="signin btn loginBtn btn btn-success btn-lg">Log in</button>
                                 </div>
-                            </form>
-
-                        <div class="col-lg-6 sigin-wd">
-                            <a href="{{ url_for('signin') }}" class="signin btn loginBtn btn btn-success btn-lg">Sign in</a>
-                        </div>
-                        
+                                <div id="signinBtn" class="col-lg-6 sigin-wd">
+                                    <a href="{{ url_for('signin') }}" class="signin btn loginBtn btn btn-success btn-lg">Sign in</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
