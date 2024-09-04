@@ -3,14 +3,22 @@
 }
 .mainTitle {
     color: green;
-    margin-top: 15px;
+    margin-top: 30px;
 }
 .form-control {
-    width: 200px;
-    height: 30px;
+    width: 500px;
+    height: 35px;
+    border: 2px solid green;
+    margin: 0 auto 7px;
+    font-weight: bold;
 }
 .form-select {
-    width: 400px;
-    margin-bottom: 7px;
+    width: 500px;
+    border: 2px solid green;
     text-align: center;
+    margin: 0 auto 7px;
+    font-weight: bold;
+}
+.selectBox {
+    margin-bottom: 30px;
 }

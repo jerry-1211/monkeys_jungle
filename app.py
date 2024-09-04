@@ -175,7 +175,9 @@ def serialize_message(message):
 def card():
     
     #  jwt 조건문
-    return render_template("card.html")
+    token = request.cookies.get('token')
+    user_data = verify_token(token) if token else None
+    return render_template("card.html", logged_in=bool(user_data))
 
 @app.route("/submit-card",methods=["POST"])
 def submitCard():
@@ -245,7 +247,6 @@ pid_post = None
 def save_data():
     global pid_post
     pid_post = request.json.get('data')
-    print("왜 안되는거냐고 ")
     print(pid_post)
     return '', 204
 
@@ -257,6 +258,7 @@ def get_data():
 # ------------------------------------------------------
 @app.route('/chat')
 def chat():
+
     return redirect(url_for('chat_user'))
 
 @app.route('/chat_user')
