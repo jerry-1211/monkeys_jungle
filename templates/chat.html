@@ -18,6 +18,113 @@
     <script defer src="../static/js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
 </head>
+<style>
+    /* 전체 컨테이너 스타일 */
+    .chat-hd {
+        background-color: #2e7d32;
+        /* 짙은 초록색 배경 */
+        border-radius: 12px;
+        
+        
+        
+        padding: 10px;
+        /* 안쪽 여백 */
+        width: 500px;
+        /* 넓은 너비 */
+        height: 700px;
+        /* 높이 설정 */
+        margin: 100px auto;
+        /* 가운데 정렬 */
+        font-family: 'Arial', sans-serif;
+        /* 글꼴 설정 */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* 메시지 컨테이너 스타일 */
+    #message-container {
+        background-color: #ffffff;
+        /* 흰색 배경 */
+        border: 2px solid #1b5e20;
+        /* 진한 초록색 테두리 */
+        border-radius: 8px;
+        /* 모서리를 둥글게 */
+        padding: 15px;
+        /* 안쪽 여백 */
+        flex-grow: 1;
+        /* 세로 공간을 최대한 차지 */
+        overflow-y: auto;
+        /* 세로 스크롤 활성화 */
+        margin-bottom: 7px;
+        /* 아래 여백 */
+    }
+
+    /* 폼 스타일 */
+    #messageForm {
+        display: flex;
+        /* 가로 정렬 */
+        justify-content: space-between;
+        /* 요소 간격 조정 */
+        align-items: center;
+        /* 요소 수직 정렬 */
+    }
+
+    /* 유저명 입력 필드 스타일 */
+    #formUser {
+        width: 100px;
+        /* 넓은 너비 */
+        padding: 10px;
+        /* 안쪽 여백 */
+        border: 2px solid #1b5e20;
+        /* 진한 초록색 테두리 */
+        border-radius: 8px;
+        /* 모서리를 둥글게 */
+        background-color: #e8f5e9;
+        /* 연한 초록색 배경 */
+        color: #1b5e20;
+        /* 진한 초록색 텍스트 */
+    }
+
+    /* 메시지 입력 필드 스타일 */
+    #formMessage {
+        flex-grow: 1;
+        /* 가로 공간을 최대한 차지 */
+        padding: 10px;
+        /* 안쪽 여백 */
+        margin-left: 15px;
+        /* 왼쪽 여백 */
+        border: 2px solid #1b5e20;
+        /* 진한 초록색 테두리 */
+        border-radius: 8px;
+        /* 모서리를 둥글게 */
+        background-color: #e8f5e9;
+        /* 연한 초록색 배경 */
+        color: #1b5e20;
+        /* 진한 초록색 텍스트 */
+    }
+
+    /* 전송 버튼 스타일 */
+    #messageForm button {
+        background-color: #1b5e20;
+        /* 진한 초록색 배경 */
+        color: white;
+        /* 흰색 텍스트 */
+        padding: 10px 20px;
+        /* 버튼 크기 조정 */
+        border: none;
+        /* 테두리 제거 */
+        border-radius: 8px;
+        /* 모서리를 둥글게 */
+        cursor: pointer;
+        /* 마우스 포인터 변경 */
+    }
+
+    #messageForm button:hover {
+        background-color: #2e7d32;
+        /* 호버 시 밝은 초록색 */
+    }
+</style>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -28,11 +135,12 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page"
+                            href="{{ url_for('index') }}">Home</a></li>
                     {% if logged_in %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
                     {% endif %}
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('card') }}">Card</a></li>
                 </ul>
@@ -41,20 +149,19 @@
     </nav>
 
 
-
-    <!-- 메시지 내용이 추가 되는 영역 -->
-    <div id="message-container"></div>
-
-    <!-- 유저명과 메시지를 작성하고 데이터를 보내는 요소 -->
-    <form id="messageForm">
-        <input id="formUser" type="text" style="width:50px;" placeholder="유저명">
-        <input id="formMessage" type="text" placeholder="메시지">
-        <button type="submit">전송</button>
-    </form>
+    <div class="chat-hd">
+        <div id="message-container"></div>
+        <!-- 유저명과 메시지를 작성하고 데이터를 보내는 요소 -->
+        <form id="messageForm">
+            <input id="formUser" type="text" placeholder="유저명" value="{{ username }}"readonly>
+            <input id="formMessage" type="text" placeholder="메시지">
+            <button type="submit">전송</button>
+        </form>
+    </div>
 
     <!-- 추가된 부분  -->
     <div>
-        <label>Enter Room Name:</label>
+        <!-- <label>Enter Room Name:</label> -->
         <!-- <input id="roomName" type="text"> -->
         <!-- <button onclick="joinRoom()">Join Room</button> -->
         <!-- <button onclick="leaveRoom()">Leave Room</button> -->
