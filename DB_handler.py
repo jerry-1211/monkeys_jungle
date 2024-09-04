@@ -86,7 +86,7 @@ class DBModule :
         pinfo = self.post_collection.find_one({"_id":pid})
         
         info = {
-            # "id" : pinfo["id"]
+            "userId" : pinfo["userId"],
             "title" : pinfo["title"],
             "content" : pinfo["content"],
             "status" : pinfo["status"],
