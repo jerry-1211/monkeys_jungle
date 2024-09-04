@@ -126,6 +126,13 @@
     }
 </style>
 
+{% with messages = get_flashed_messages()%}
+    {% if message %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-lg-5">
@@ -150,7 +157,7 @@
         </div>
     </nav>
 
-
+    <div>{{info["title"]}} {{info["content"]}} {{info["status"]}}</div>
     <div class="chat-hd">
         <!-- 성진 채팅 프로필링크, 타이틀, 아이디 가져오는 작업 중 -->
         <div class="chatInfo">

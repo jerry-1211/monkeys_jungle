@@ -79,7 +79,20 @@ class DBModule :
     def existing_card(self,info):
         return self.post_collection.find_one(info)
 
+    # chat방에서 PID로 계시글 정보 가져오기 
+    def get_post_info(self,pid):
         
+        pid = ObjectId(pid)
+        pinfo = self.post_collection.find_one({"_id":pid})
+        
+        info = {
+            # "id" : pinfo["id"]
+            "title" : pinfo["title"],
+            "content" : pinfo["content"],
+            "status" : pinfo["status"],
+        }
+        return info
+
 
     def message_find_room(self,room):
         results = list(self.messages_collection.find({'room': room}))
