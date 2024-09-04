@@ -270,6 +270,36 @@ def chat_user():
 
 
 
+# $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-if __name__ == '__main__':
-    socketio.run(app,host="0.0.0.0", port=5001, debug=True)
+# @app.route("/get_userinfo", methods=["POST"])
+# def giveUserInfo():
+#     userId = request.form['id_give']
+#     print(userId)
+
+#     if userId == informations["userId"]:
+#         return jsonify({"result":"success", "userInfo": informations})
+#     else:
+#         return jsonify({"result":"failed"})
+
+# @app.route('/banana', methods=['POST'])
+# def incrementBanana():
+#     # # 클라이언트로부터 받은 토큰을 디코딩하여 유저 정보를 알아냄
+
+#     # 
+#     # id_receive = request.form['id_give'] # 
+#     # user = db.users.find_one({'myID': id_receive}) #프로필의 유저
+
+#     # # 해당 documents의 likes를 새로운 변수에 받아 1 증가시킨다.
+#     # tempBanana = user['bananas'] + 1
+
+#     # # 증가시킨 변수로 다시 셋팅
+#     # db.users.update_one({'myID': id_receive}, {'$set': {'bananas': tempBanana}})
+#     return jsonify({'result': 'success'})
+
+
+
+# if __name__ == '__main__':
+#     socketio.run(app,host="0.0.0.0", port=5001, debug=True)
+
+
