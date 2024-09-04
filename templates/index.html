@@ -1,146 +1,63 @@
 <style>
-    .monkey_img{
-        width: 100%;
-        text-align: center;
-    }
-
-    .monkey_bg {
-        
-  width: 70%; /* 이미지 너비 조절 */
-  height: auto; /* 이미지 비율에 따라 높이 자동 조절 */
-  border-radius: 8px; /* 모서리를 둥글게 처리 */
+.monkey_img{
+    width: 100%;
+    max-height: 300px;
+    margin-top: -9%;
+    text-align: center;
 }
-
+.monkey_bg {
+    width: 70%; /* 이미지 너비 조절 */
+    height: auto; /* 이미지 비율에 따라 높이 자동 조절 */
+    border-radius: 8px; /* 모서리를 둥글게 처리 */
+}
 .monkey{
     margin: 50px;
 }
-
 .monkey_container {
             display: flex; /* Flexbox를 사용하여 가로 정렬 */
             justify-content: center; /* 이미지 사이의 공간을 균등하게 분배 */
             align-items: flex-start; /* 세로 정렬 */
-        }
+            margin-top: 810px;
+            max-height: 550px;
+}
 
-        
-    </style>
 </style>
 
 
 
 <body>
     {% extends "base.html" %}
-
-
-
     {% block content %}
 
 
 <div class="monkey_img">
     <img src="../static/assets/img/monkey_bg.png" alt="monkey_bg" class="monkey_bg">
 </div>
-    <div class="monkey_container">
+<div class="monkey_container">
     <img src="../static/assets/img/monkey_write1.png" alt="monkey_write1" class="monkey monkey_write1" width="30%">
     <img src="../static/assets/img/monkey_write2.png" alt="monkey_write2" class="monkey monkey_write2" width="40%">
-
 </div>
-    
-
-    
-    
     
 
 <header class="py-5">
     <div class="container px-lg-5">
         <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
             <div class="m-4 m-lg-5">
-                <h1 class="display-5 fw-bold">A warm welcome!</h1>
-                <p class="fs-4">Bootstrap utility classes are used to create this jumbotron since the old component
-                    has been removed from the framework. Why create custom CSS when you can use utilities?</p>
-                <a class="btn btn-primary btn-lg" href="#!">Call to action</a>
+                <h1 class="display-5 fw-bold">Monkeys Jungle</h1>
+                <p class="fs-4">정글속에서 몽키즈라는 <br>최소한의 도구로 살아남아 성장 해보세요!</p>
+                {% if logged_in %}
+                    <a class="btn btn-success btn-lg" href="#card 링크!!!!!!">Card</a>
+                {% else %}
+                    <a class="btn btn-success btn-lg" href="{{ url_for('signin') }}">sign in</a>
+                {% endif %}
             </div>
         </div>
     </div>
 </header>
 
-
-
-<!--     
-    <section class="pt-4">
-        <div class="container px-lg-5">
-    
-            <div class="row gx-lg-5">
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-collection"></i></div>
-                            <h2 class="fs-4 fw-bold">Fresh new layout</h2>
-                            <p class="mb-0">With Bootstrap 5, we've created a fresh new layout for this template!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-cloud-download"></i></div>
-                            <h2 class="fs-4 fw-bold">Free to download</h2>
-                            <p class="mb-0">As always, Start Bootstrap has a powerful collectin of free templates.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-card-heading"></i></div>
-                            <h2 class="fs-4 fw-bold">Jumbotron hero header</h2>
-                            <p class="mb-0">The heroic part of this template is the jumbotron hero header!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-bootstrap"></i></div>
-                            <h2 class="fs-4 fw-bold">Feature boxes</h2>
-                            <p class="mb-0">We've created some custom feature boxes using Bootstrap icons!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-code"></i></div>
-                            <h2 class="fs-4 fw-bold">Simple clean code</h2>
-                            <p class="mb-0">We keep our dependencies up to date and squash bugs as they come!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-4 mb-5">
-                    <div class="card bg-light border-0 h-100">
-                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
-                                    class="bi bi-patch-check"></i></div>
-                            <h2 class="fs-4 fw-bold">A name you trust</h2>
-                            <p class="mb-0">Start Bootstrap has been the leader in free Bootstrap templates since 2013!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
     {% block message %}
     {% endblock message %}
-
-
     {% endblock %}
-
-
 
 </body>
 

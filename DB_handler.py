@@ -13,14 +13,14 @@ class DBModule :
         client = MongoClient('localhost',27017)
         self.db = client.monkeys
         self.user_collection = self.db.users
-        pass
 
-    def signin(self,name,userId,pwd,phoneNumber,answerQ1,answerQ2,answerQ3,answerQ4,answerQ5,answerQ6,answerQ7,answerQ8,answerQ9,answerQ10,):
+    def signin(self,name,userId,pwd,phoneNumber,mbti,answerQ1,answerQ2,answerQ3,answerQ4,answerQ5,answerQ6,answerQ7,answerQ8,answerQ9,answerQ10,):
         informations = {
             "uName" : name,
             "userId" : userId,
             "pwd" : pwd,
             "phoneNumber" : phoneNumber,
+            "MBTI" : mbti,
             "q1" : answerQ1,
             "q2" : answerQ2,
             "q3" : answerQ3,
@@ -32,31 +32,19 @@ class DBModule :
             "q9" : answerQ9,
             "q10" : answerQ10,
         } 
+        print(informations)
         self.user_collection.insert_one(informations)
-
-
-
-
-        # if self.signin_verification(_id_):
-            
-        #     return True
-        # else :
-        #     return False
+    
+    def findPassword(self, uid, upwd):
+        uinfo = self.user_collection.find_one({'userId': uid})
         
-    # def signin_verification(self,uid):
-    #     users = self.db.child("users").get().val()
-    #     for i in users:
-    #         if uid == i :
-    #             return False
-    #     return True
-
-    # def login(self,uid,pwd):
-    #         users = self.db.child("users").get().val()
-    #         try : 
-    #             userinfo = users[uid]
-    #             if userinfo["pwd"] == pwd :
-    #                 return True
-    #             else :
-    #                 return False 
-    #         except :
-    #             return False
+        # 사용자 정보가 없는 경우
+        if uinfo is None:
+            return None  # 사용자 없음
+        
+        # 비밀번호가 일치하지 않는 경우
+        if upwd != uinfo["pwd"]:
+            return True  # 비밀번호 오류
+        
+        # 비밀번호가 일치하는 경우
+        return False  # 인증 성공
