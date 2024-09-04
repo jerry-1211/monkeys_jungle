@@ -46,7 +46,7 @@
                 <h1 class="display-5 fw-bold">Monkeys Jungle</h1>
                 <p class="fs-4">정글속에서 몽키즈라는 <br>최소한의 도구로 살아남아 성장 해보세요!</p>
                 {% if logged_in %}
-                    <a class="btn btn-success btn-lg" href="#card 링크!!!!!!">Card</a>
+                    <a class="btn btn-success btn-lg" href="{{ url_for('card') }}">Card</a>
                 {% else %}
                     <a class="btn btn-success btn-lg" href="{{ url_for('signin') }}">sign in</a>
                 {% endif %}

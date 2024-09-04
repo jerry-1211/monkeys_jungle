@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Heroic Features - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../static/css/styles.css" rel="stylesheet" />
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script defer src="../static/js/scripts.js"></script>
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+
+
+    <style>
+        .bg-lightblue {
+            background-color: rgba(0, 191, 255, 0.9);
+        }
+
+        .bg-lightcoral {
+            background-color: rgba(240, 128, 128, 0.9);
+        }
+
+        .card-title {
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .create-button {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .button-size {
+            display: inline-block;
+            width: 400px;
+            height: 200px;
+
+            font-size: 50px;
+            margin-right: 30px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .modal-title {
+            font-weight: 1000;
+        }
+
+        .footer {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            left: 50%;
+            /* 왼쪽에서 50% 위치로 이동 */
+            transform: translateX(-50%);
+            /* 자신 너비의 50%를 왼쪽으로 이동 */
+            margin: 0;
+            text-align: center;
+            background-color: rgba(226, 226, 226, 0.9);
+        }
+
+        .card-body:hover {
+            background-color: rgb(201, 243, 210);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+
+
+    <!DOCTYPE html>
+    <html lang="ko">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Monkeys Jungle</title>
+        <!-- Bootstrap CSS 추가 -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container px-lg-5">
+            <a class="navbar-brand" href="{{ url_for('index') }}">MONKEYS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a></li>
+                    {% if logged_in %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('card') }}">Card</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Page Content -->
+    <section class="pt-5">
+        <div class="container px-lg-5">
+            <!-- Card Features -->
+            <div id="card-features" class="row gx-lg-5">
+                <!-- Cards will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons to trigger modals -->
+    <div class="create-button footer text-center mt-4">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+            data-bs-target="#CardMakingModal1">해주세요</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#CardMakingModal2">해줄게요</button>
+    </div>
+    <!-- Modals -->
+   <!-- '해주세요' Modal -->
+<div class="modal fade" id="CardMakingModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-lightcoral">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">해주세요 작성하기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form Start -->
+                <form id="CardMakingForm1" action="/submit-card" method="POST">
+                    <div class="mb-3">
+                        <label for="modalTitle1" class="form-label">제목</label>
+                        <input type="text" class="form-control" id="modalTitle1" name="title"
+                            placeholder="제목을 작성해주세요" required>
+                    </div>
+                    <input type="hidden" id="statusField1" name="status" value="해주세요"> <!-- Hidden field for status -->
+                    <div class="mb-3">
+                        <label for="modalContents1" class="form-label">내용</label>
+                        <textarea class="form-control" id="modalContents1" name="content" placeholder="내용을 작성해주세요"
+                            rows="3" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                        <!-- Submit button to submit the form -->
+                        <button type="submit" class="btn btn-success" onclick="postCard(1)">게시하기</button>
+                    </div>
+                </form>
+                <!-- Form End -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- '해줄게요' Modal -->
+<div class="modal fade" id="CardMakingModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-lightblue">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">해줄게요 작성하기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="CardMakingForm2" action="/submit-card" method="POST">
+                    <div class="mb-3">
+                        <label for="modalTitle2" class="form-label">제목</label>
+                        <input type="text" class="form-control" id="modalTitle2" name="title"
+                            placeholder="제목을 작성해주세요">
+                    </div>
+                    <input type="hidden" id="statusField2" name="status" value="해줄게요"> <!-- Hidden field for status -->
+                    <div class="mb-3">
+                        <label for="modalContents2" class="form-label">내용</label>
+                        <textarea class="form-control" id="modalContents2" name="content" placeholder="내용을 작성해주세요"
+                            rows="3"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                        <!-- Submit 버튼을 사용하여 폼을 제출 -->
+                        <button type="submit" class="btn btn-success" onclick="postCard(2)">게시하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Bootstrap JS 및 jQuery 추가 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+        window.onload = function () {
+            uploadCard();
+        };
+    
+        $(document).ready(function () {
+            // 모달이 닫힐 때 폼 초기화
+            $('#CardMakingModal1, #CardMakingModal2').on('hidden.bs.modal', function () {
+                $(this).find('input, textarea').val('');
+            });
+    
+            $(document).on('click', '.card-body', function () {
+                const id = $(this).attr('id');
+                console.log('Clicked card ID:', id);
+                window.location.href = `chat?id=${encodeURIComponent(id)}`;
+                var pid = encodeURIComponent(id);
+    
+                // pid 저장
+                fetch('/save-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ data: pid }),
+                });
+            });
+        });
+    
+        function makeCard(status, id, title, contents) {
+            const cardHtml = `
+                <div class="col-lg-6 col-xxl-4 mb-5">
+                    <div class="card border-0 h-100">
+                        <div id="${id}" class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                            <h2 class="fs-3 fw-bold card-title">${title}</h2>
+                            <p class="mb-0 text-left">${contents}</p>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-lg" disabled>${status}</button>
+                    </div>
+                </div>
+            `;
+            $("#card-features").append(cardHtml);
+        }
+    
+        function uploadCard() {
+            $.ajax({
+                type: "GET",
+                url: "/upload-card",
+                data: {},
+                success: function (response) {
+                    let cards = response["cards"];
+                    console.log(cards);
+    
+                    // 서버에서 가져온 카드 추가
+                    // cards.forEach(card => {
+                    //     makeCard(card["status"], card["_id"], card["title"], card["content"]);
+                    
+                    for (let i=0 ; i<cards.length ; i++ ){
+                        const cardId = cards[i]["_id"];
+                        if(!document.getElementById(cardId)) {
+                            makeCard(cards[i]["status"], cards[i]["_id"], cards[i]["title"], cards[i]["content"]);
+                        }
+                    }
+                    
+                    
+                }
+            });
+        }
+    </script>
+    
+</body>
+
+</html>
