@@ -53,7 +53,9 @@ def signin_done():
     q8 = request.form.get("signin_q8")
     q9 = request.form.get("signin_q9")
     q10 = request.form.get("signin_q10")
-    DB.signin(name,userId,pwd,phoneNumber,mbti,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10)
+    # 바나나추가
+    bananas = 5
+    DB.signin(name,userId,pwd,phoneNumber,mbti,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,bananas)
     return redirect(url_for("login"))
     
 # 토큰 검증을 위한 데코레이터
@@ -290,13 +292,32 @@ def chat_user():
         )
 
 # 연습용
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
+# @app.route('/profile')
+# def profile():
+#     return render_template('profile.html')
 
 
 
 # $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+@app.route('/profile', methods=['POST'])
+def profile():
+    
+    # # 전달된 userId를 가지고 DB를 검색해서 해당 유저의 정보를 찾아
+    # # render_template("profile.html", userID=userID) 처럼 넘기기
+    userID = request.form.get('userid_give')
+    
+    user = DB.find_user_from_id(userID)
+    del user['_id']
+    
+    print("iserserserszxzzzzzzzzzzziserserserszxzzzzzzzzzzz")
+    print(user)
+    print("iserserserszxzzzzzzzzzzziserserserszxzzzzzzzzzzz")
+    # print(userID, user)
+    
+    return render_template("profile.html", user=user)
+
+
 # @app.route("/get_userinfo", methods=["POST"])
 # def giveUserInfo():
 #     userId = request.form['id_give']
@@ -325,6 +346,6 @@ def profile():
 
 
 if __name__ == '__main__':
-    socketio.run(app,host="0.0.0.0", port=5001, debug=True)
+    socketio.run(app,host="0.0.0.0", port=3000, debug=True, allow_unsafe_werkzeug=True)
 
 

@@ -194,7 +194,13 @@
         <div class="chat-container">
             <div class="chat-title">제목 : {{info["title"]}} </div>
             <div class="chat-content">내용 : {{info["content"]}}</div>
-            <a class="chat-userId" href="{{ url_for('profile') }}">작성자 : {{info["userId"]}}</a>
+            <!-- <a class="chat-userId" href="{{ url_for('profile') }}">작성자 : {{info["userId"]}}</a> -->
+            <form action="{{ url_for('profile') }}" method="POST">
+                <input type="hidden" name="userid_give" value="{{ info['userId'] }}"> <!-- 전달할 userID 값을 hidden 필드로 설정 -->
+<button type="submit" class="btn btn-success btn-lg">{{ info['userId'] }}</button> <!-- 버튼을 링크와 같은 스타일로 -->
+            </form>
+
+
         </div>
         <div id="message-container">
         </div>

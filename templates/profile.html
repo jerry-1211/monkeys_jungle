@@ -29,24 +29,20 @@
                 console.log("###################################################");
                 console.log("여기는 들어오니?");
                 console.log("###################################################");
-                getUserInfo();
-                uploadCard();
+                getUser();
             });
 
-            function getUserInfo() {
-                let userID = "asg14dsf32423sdfh"; // 페이지로 들어온 ID혹은 토큰 등
+            function getUser() {
+                // let userID = "asg14dsf32423sdfh"; // 페이지로 들어온 ID혹은 토큰 등
 
                 // $.ajax({
                 //     method: "POST",
                 //     url: "/get_userinfo",
-                //     data: JSON.stringify({ id_give: userID }), 
-                //     contentType: "application/json",
+                //     data: { id_give: userID }, 
                 //     success: function(response){
 
                 //         console.log(response)
                 //         if(response["result"] == "success") {
-                //             print("정보를 얻어오는데에 성공했습니다.");
-                            
                 //             let userInfo = response["userInfo"];
                 //             makeUserInfoPage(userInfo);
                 //         } else {
@@ -54,27 +50,17 @@
                 //         }
                 //     }
                 // })
-
-                $.ajax({
-                    method: "POST",
-                    url: "/get_userinfo",
-                    data: { id_give: userID }, 
-                    success: function(response){
-
-                        console.log(response)
-                        if(response["result"] == "success") {
-                            let userInfo = response["userInfo"];
-                            makeUserInfoPage(userInfo);
-                        } else {
-                            alert("유저 정보를 얻어오는데 실패했습니다.")
-                        }
-                    }
-                })
+                user = '{{ user|tojson }}'
+                console.log(user);
+                makeUserInfoPage(user);
             }
 
             function makeUserInfoPage(userInfo) {
-                let temp_name = userInfo['uName'];
-                temp_name = temp_name.split('').join(' ');
+                temp_user = JSON.parse(userInfo);
+                console.log(temp_user);
+                let temp_name = temp_user['uName'];
+                console.log(temp_user['uName']);
+                //temp_name = temp_name.split('').join(' ');
 
                 let temp_html = `
                 <div class="row">
@@ -85,10 +71,10 @@
                     <div class="col-8">
                         <h1 class="profile-name">${temp_name}</h1>
                         <hr>
-                        <p class="profile-contact">TEL. ${userInfo['phoneNumber']}</p>
+                        <p class="profile-contact">TEL. ${temp_user['phoneNumber']}</p>
                         <div class="inline-section">
-                            <p class="profile-contact">${userInfo['mbti']}</p>
-                            <p class="profile-contact">🍌 보유 바나나개수 : ${userInfo['bananas']}개</p>
+                            <p class="profile-contact">${temp_user['MBTI']}</p>
+                            <p class="profile-contact">🍌 보유 바나나개수 : ${temp_user['bananas']}개</p>
                         </div>
                     </div>
                 </div>
@@ -97,16 +83,16 @@
                     저는 이런사람 입니다.
                 </div>
                 <ul id="profile-list" class="custom">
-                        <li>${userInfo['q1']}</li>
-                        <li>${userInfo['q2']}</li>
-                        <li>${userInfo['q3']}</li>
-                        <li>${userInfo['q4']}</li>
-                        <li>${userInfo['q5']}</li>
-                        <li>${userInfo['q6']}</li>
-                        <li>${userInfo['q7']}</li>
-                        <li>${userInfo['q8']}</li>
-                        <li>${userInfo['q9']}</li>
-                        <li>${userInfo['q10']}</li>
+                        <li>${temp_user['q1']}</li>
+                        <li>${temp_user['q2']}</li>
+                        <li>${temp_user['q3']}</li>
+                        <li>${temp_user['q4']}</li>
+                        <li>${temp_user['q5']}</li>
+                        <li>${temp_user['q6']}</li>
+                        <li>${temp_user['q7']}</li>
+                        <li>${temp_user['q8']}</li>
+                        <li>${temp_user['q9']}</li>
+                        <li>${temp_user['q10']}</li>
                 </ul>`
 
                 $('#ProfileContainer').append(temp_html);
@@ -187,23 +173,10 @@
             .list-style-none {
                 list-style-type: none; /* 기본 기호 제거 */
             }
-           
         </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container px-lg-5">
-            <a class="navbar-brand" href="#!">Monkeys Jungle</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+
 
     <div id="ProfileContainer" class="profile-container">
        <!-- <div class="row">

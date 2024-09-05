@@ -10,7 +10,7 @@ from pymongo import MongoClient
 
 class DBModule :
     def __init__(self):
-        client = MongoClient('localhost',27017)
+        client = MongoClient('mongodb://test:test@3.38.165.26',27017)
         self.db = client.monkeys
         self.user_collection = self.db.users  # 사용자 정보를 저장하는 컬렉션
         self.post_collection = self.db.posts  # 게시물 정보를 저장하는 컬렉션
@@ -22,7 +22,7 @@ class DBModule :
         raise TypeError("Object of type ObjectId is not JSON serializable")
 
 
-    def signin(self,name,userId,pwd,phoneNumber,mbti,answerQ1,answerQ2,answerQ3,answerQ4,answerQ5,answerQ6,answerQ7,answerQ8,answerQ9,answerQ10):
+    def signin(self,name,userId,pwd,phoneNumber,mbti,answerQ1,answerQ2,answerQ3,answerQ4,answerQ5,answerQ6,answerQ7,answerQ8,answerQ9,answerQ10,bananas):
         informations = {
             "uName" : name,
             "userId" : userId,
@@ -39,6 +39,7 @@ class DBModule :
             "q8" : answerQ8,
             "q9" : answerQ9,
             "q10" : answerQ10,
+            "bananas" : bananas
         } 
         print(informations)
         self.user_collection.insert_one(informations)
@@ -104,4 +105,9 @@ class DBModule :
         message_id = (self.messages_collection.insert_one(info)).inserted_id
         print(message_id)
         return message_id
+    
+    def find_user_from_id(self,userID):
+        user = self.user_collection.find_one({'userId': userID})
+        # print(user)
+        return user
 
