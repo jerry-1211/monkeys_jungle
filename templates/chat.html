@@ -24,10 +24,7 @@
         background-color: #2e7d32;
         /* 짙은 초록색 배경 */
         border-radius: 12px;
-        
-        
-        
-        padding: 10px;
+        padding: 7px;
         /* 안쪽 여백 */
         width: 500px;
         /* 넓은 너비 */
@@ -124,15 +121,48 @@
         background-color: #2e7d32;
         /* 호버 시 밝은 초록색 */
     }
+
+    .chat-container {
+            width: 100%;
+            margin: 5px auto;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 제목 스타일 */
+        .chat-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #187b42; /* 짙은 초록색 경계 */
+        }
+
+        /* 내용 스타일 */
+        .chat-content {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #34495e;
+            white-space: pre-wrap; /* 내용 줄 바꿈 적용 */
+            padding: 10px 0;
+        }
+
+        
+
 </style>
 
 {% with messages = get_flashed_messages()%}
-    {% if message %}
-        <script>
-            alert("{{messages[-1]}}")
-        </script>
-    {% endif %}
+{% if message %}
+<script>
+    alert("{{messages[-1]}}")
+</script>
+{% endif %}
 {% endwith %}
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-lg-5">
@@ -146,9 +176,9 @@
                             href="{{ url_for('index') }}">Home</a></li>
                     {% if logged_in %}
 
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Log out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Log out</a></li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Log in</a></li>
 
                     {% endif %}
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('card') }}">Card</a></li>
@@ -157,20 +187,19 @@
         </div>
     </nav>
 
-    <div>{{info["title"]}} {{info["content"]}} {{info["status"]}} {{info["userId"]}}</div>
-    <div class="chat-hd">
-        <!-- 성진 채팅 프로필링크, 타이틀, 아이디 가져오는 작업 중 -->
-        <div class="chatInfo">
-            <p class="chatTitle">chat의 타이틀 제목이 들어갑니다.</p>
-            <a class="chatUser" href="#프로필페이지로이동"> 유저네임 </a>
-        </div>
-        <!-- 여기까지 성진 작업 -->
 
-        
-        <div id="message-container"></div>
-        <!-- 유저명과 메시지를 작성하고 데이터를 보내는 요소 -->
+
+    <div>{{info["status"]}}</div>
+    <div class="chat-hd">
+        <div class="chat-container">
+            <div class="chat-title">제목 : {{info["title"]}} </div>
+            <div class="chat-content">내용 : {{info["content"]}}</div>
+        </div>
+        <div id="message-container">
+        </div>
+
         <form id="messageForm">
-            <input id="formUser" type="text" placeholder="유저명" value="{{ username }}"readonly>
+            <input id="formUser" type="text" placeholder="유저명" value="{{ username }}" readonly>
             <input id="formMessage" type="text" placeholder="메시지">
             <button type="submit">전송</button>
         </form>
@@ -233,6 +262,8 @@
                             var content = document.createElement('div');
                             content.textContent = message.user + ': ' + message.message;
                             messageContainer.appendChild(content);
+                            messageContainer.scrollTop = messageContainer.scrollHeight;
+
                         });
                     });
 
@@ -242,6 +273,9 @@
                         var content = document.createElement('div');
                         content.textContent = data.user + ': ' + data.message;
                         messageContainer.appendChild(content);
+
+                        messageContainer.scrollTop = messageContainer.scrollHeight;
+
                     });
 
                     socket.on('status', function (data) {
