@@ -194,6 +194,7 @@
         <div class="chat-container">
             <div class="chat-title">제목 : {{info["title"]}} </div>
             <div class="chat-content">내용 : {{info["content"]}}</div>
+            <a class="chat-userId" href="{{ url_for('profile') }}">작성자 : {{info["userId"]}}</a>
         </div>
         <div id="message-container">
         </div>
